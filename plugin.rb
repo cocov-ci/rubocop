@@ -86,7 +86,7 @@ class RubocopPlugin < Cocov::PluginKit::Run
         cop_name = offense["cop_name"]
         kind = COP_OVERRIDE.fetch(cop_name) { COP_MAPPING[cop_name] } || :bug
 
-        emit_problem(
+        emit_issue(
           kind: kind,
           file: path,
           line_start: offense["location"]["start_line"],
