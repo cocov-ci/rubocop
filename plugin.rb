@@ -60,18 +60,18 @@ class RubocopPlugin < Cocov::PluginKit::Run
   end
 
   COP_MAPPING = {
-    "Bundler" => :style,
-    "Gemspec" => :style,
+    "Bundler" => :convention,
+    "Gemspec" => :convention,
     "Layout" => :style,
     "Lint" => :bug,
     "Metrics" => :complexity,
     "Migration" => :bug,
-    "Naming" => :style,
+    "Naming" => :convention,
     "Security" => :security,
     "Style" => :style,
     "Performance" => :performance,
-    "RSpec" => :style,
-    "Rails" => :style,
+    "RSpec" => :convention,
+    "Rails" => :convention,
   }.freeze
 
   COP_OVERRIDE = {
