@@ -48,13 +48,13 @@ class RubocopPlugin < Cocov::PluginKit::Run
     Dir["#{base_dir}/*.gem"].each { |f| FileUtils.rm_rf f }
 
     puts "Building #{spec.name}"
-    exec("gem build #{File.basename(gemspec_path)}", chdir: base_dir, env: ENV)
+    exec("gem build #{File.basename(gemspec_path)}", chdir: base_dir)
 
     built_gemspec = Dir["#{base_dir}/*.gem"].first
     raise "Built #{gemspec_path}, but no .gem file found" if built_gemspec.nil?
 
     puts "Installing #{spec.name} from #{built_gemspec}"
-    exec("gem install #{built_gemspec}", chdir: base_dir, env: ENV)
+    exec("gem install #{built_gemspec}", chdir: base_dir)
   ensure
     FileUtils.rm_rf target
   end
@@ -79,7 +79,7 @@ class RubocopPlugin < Cocov::PluginKit::Run
   }.freeze
 
   def run_rubocop
-    stdout, stderr = exec2("rubocop -f json --fail-level F", env: ENV, chdir: @workdir)
+    stdout, stderr = exec2("rubocop -f json --fail-level F", chdir: @workdir)
     JSON.parse(stdout)["files"].each do |file|
       path = file["path"]
       file["offenses"].each do |offense|
